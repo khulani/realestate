@@ -1,0 +1,13 @@
+<h1> Log in </h1>
+
+<p>
+  <%= @user.account_type %>
+</p>
+
+<p>
+  <%= link_to("Delete my account", "/users/#{@user.id}", method: :delete)  %>
+</p>
+
+<p>
+  <a href="/logout">Log out</a>
+</p>

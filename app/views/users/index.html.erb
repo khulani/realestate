@@ -1,0 +1,36 @@
+<h1> Log in </h1>
+
+<% flash[:errors] && flash[:errors].each do |error| %>
+  <p style="color:red"><%= error %></p>
+<% end %>
+
+<%= form_tag("/login", method: "post") do %>
+  <%= label_tag(:username, "Username: ") %>
+  <%= text_field_tag(:username) %>
+  <%= label_tag(:password, "Password: ") %>
+  <%= text_field_tag(:password) %>
+  <%= hidden_field_tag(:event, "login") %>
+  <%= submit_tag("Log in") %>
+<% end %>
+
+<h1> Sign up </h1>
+
+<%= form_tag("/users", method: "post") do %>
+  <p>
+    Account type:
+    <%= radio_button_tag(:account_type, 'admin') %>
+    <%= label_tag(:admin, 'Admin') %>
+    <%= radio_button_tag(:account_type, 'agent') %>
+    <%= label_tag(:agent, 'Agent') %>
+    <%= radio_button_tag(:account_type, 'customer') %>
+    <%= label_tag(:agent, 'Customer') %>
+  </p>
+  <p>
+    <%= label_tag(:username, "Username: ") %>
+    <%= text_field_tag(:username) %>
+    <%= label_tag(:password, "Password: ") %>
+    <%= text_field_tag(:password) %>
+    <%= hidden_field_tag(:event, "signup") %>
+    <%= submit_tag("Signup") %>
+  </p>
+<% end %>

@@ -1,0 +1,68 @@
+<div style="margin:50px;">
+  <p>
+    <a href='#' onclick='properties();'>properties</a> |
+    <a href='#' onclick='activities();'>activities</a>
+  </p>
+  <form id='api'>
+    <p>
+      Method:
+      <select id="method">
+        <option value="GET">GET</option>
+        <option value="POST" selected>POST</option>
+        <option value="PUT">PUT</option>
+        <option value="DELETE">DELETE</option>
+      </select>
+    </p>
+    <p>
+      URL Path: '/' +
+      <input type="text" id="path" value="properties">
+    </p>
+    <p id='notes'>
+      Notes: REST service for properties.
+    </p>
+    <p>
+      Data: <br/>
+      <textarea id="json" rows="17" cols="70">
+
+  {
+    "name" : "San Jose Diridon Station",
+    "street" : "65 Cahill St",
+    "city" : "San Jose",
+    "state" : "CA",
+    "latitude" : 37.329875,
+    "longitude" : -121.902517,
+    "status" : "rented",
+    "agent_id" : 23,
+    "resident_id" : 24
+  }
+      </textarea>
+    </p>
+
+    <input type="submit" value="submit">
+  </form>
+  <h3>Response:</h3>
+  <pre id="response">
+    Response...
+  </pre>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#api').submit(function(event) {
+      event.preventDefault();
+      $.ajax({
+        method: $('#method').val(),
+        url: '/' + $('#path').val(),
+        data: JSON.parse($('#json').val())
+      })
+      .done(function( msg ) {
+        $('#response').html(JSON.stringify(msg, null, 2));
+      })
+      .fail(function(response) {
+        msg = { "responseJSON": response.responseJSON, "status" : response.status };
+        $('#response').html(JSON.stringify(response.responseJSON, null, 2));
+        $('#response').append('\n\n'+ "status: " + response.status);
+      });
+    });
+  });
+</script>

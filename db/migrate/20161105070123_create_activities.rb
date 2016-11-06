@@ -3,9 +3,10 @@ class CreateActivities < ActiveRecord::Migration[5.0]
     create_table :activities do |t|
       t.string :event
       t.datetime :date
-      t.references :user, foreign_key: true
+      t.integer :user_id
 
       t.timestamps
     end
+    add_index :activities, :user_id
   end
 end

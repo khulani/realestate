@@ -1,0 +1,11 @@
+json.name property.name
+json.street property.street
+json.city property.city
+json.state property.state
+json.latitude property.latitude.to_f
+json.longitude property.longitude.to_f
+json.agent property.agent_id
+json.resident property.resident_id
+json.status property.status
+json.created_at property.created_at
+json.updated_at property.updated_at
