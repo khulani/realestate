@@ -9,6 +9,15 @@ bundle install
 >>  host: localhost
 
 (run in terminal...)
-rake db:create  # creates the databases
-rake db:migrate # creates the tables
-rake db:seed    # seeds the database with test data
+rake db:create    # creates the databases
+rake db:migrate   # creates the tables
+rake db:seed      # seeds the database with test data
+
+(run in terminal...)
+rake              # runs unit test via rspec
+
+
+- - - - - - -
+
+Ideally, REST Web Service would be more secure using HTTPS in addition
+to requiring an authentication token.
