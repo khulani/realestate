@@ -1,0 +1,78 @@
+<h1>
+  Real Estate Operations
+</h1>
+
+<ul>
+  <% flash[:errors] && flash[:errors].each do |error| %>
+    <li style="color:red"><%= error %></li>
+  <% end %>
+</ul>
+
+<p>
+  <%= link_to('Home', user_path(@user), method: :get) %>
+  | <a href="/logout">Log out</a>
+</p>
+
+<h3> All Properties (<a onclick="centerMap()" href="#">reset map</a>) </h3>
+<div id="map" style="height:500px;width:800px;"></div>
+<script>
+  var map;
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 37.335206, lng: -121.892924},
+      zoom: 15
+    });
+    <% properties = Property.limit(50) %>
+    <% properties.each do |property| %>
+      <% if property.latitude && property.longitude %>
+        new google.maps.Marker({
+          position: {lat: <%= property.latitude %>, lng: <%= property.longitude %>},
+          map: map,
+          title: "<%= property.name %>"
+        });
+      <% end %>
+    <% end %>
+  }
+  function centerMap() {
+    map.setCenter({ lat: 37.335206, lng: -121.892924 });
+    map.setZoom(15);
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRyKKYpV6LAy-jRbA02c8qB3FyRVu3hU8&callback=initMap" async defer></script>
+
+<% if @user.account_type == 'agent' %>
+  <h3>Add property: </h3>
+  <%= form_tag("/real-estate/add", method: "post") do %>
+    <b>
+      <%= label_tag(:name, "Name") %> <br/>
+      <%= text_field_tag(:name, 'San Jose Diridon Station') %> <br/><br/>
+      <%= label_tag(:street, "Street") %> /
+      <%= label_tag(:city, "City") %> /
+      <%= label_tag(:state, "State") %> <br/>
+      <%= text_field_tag(:street, '65 Cahill St') %> /
+      <%= text_field_tag(:city, 'San Jose') %> /
+      <%= text_field_tag(:state, 'CA') %> <br/><br/>
+      <%= label_tag(:latitude, "Latitude") %> /
+      <%= label_tag(:longitude, "Longitude") %> <br/>
+      <%= text_field_tag(:latitude, '37.329875') %> /
+      <%= text_field_tag(:longitude, '-121.902517') %> <br/><br/>
+      <%= radio_button_tag(:status, 'for sale', :checked) %>
+      <%= label_tag(:for_sale, 'For Sale') %>
+      <%= radio_button_tag(:status, 'for rent') %>
+      <%= label_tag(:for_rent, 'For Rent') %> <br/><br/>
+    </b>
+    <%= submit_tag("Add") %>
+  <% end %>
+<% end %>
+
+<ul>
+  <% properties.each do |property| %>
+    <li>
+      <%= property.name %> (<span style="color:red;"><b><%= property.status %></b></span>),
+      <%= "#{property.street}, #{property.city}, #{property.state}" %>
+      <% property.get_operations(@user).map do |operation| %>
+        | <%= link_to(operation, "/real-estate/#{property.id}/#{operation}", method: :get) %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

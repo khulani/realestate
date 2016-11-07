@@ -1,16 +1,29 @@
-<h1> Log in </h1>
+<p>
+  Sample accounts provided as follows <b><i>(username/password)</i></b>:
+  <ul>
+    <li>admin/admin</li>
+    <li>agent1/agent1</li>
+    <li>agent2/agent2</li>
+    <li>customer1/customer1</li>
+    <li>customer2/customer2</li>
+  </ul>
 
-<% flash[:errors] && flash[:errors].each do |error| %>
-  <p style="color:red"><%= error %></p>
-<% end %>
+</p>
+
+<ul>
+  <% flash[:errors] && flash[:errors].each do |error| %>
+    <li style="color:red"><%= error %></li>
+  <% end %>
+</ul>
+
+<h1> Log in </h1>
 
 <%= form_tag("/login", method: "post") do %>
   <%= label_tag(:username, "Username: ") %>
   <%= text_field_tag(:username) %>
   <%= label_tag(:password, "Password: ") %>
   <%= text_field_tag(:password) %>
-  <%= hidden_field_tag(:event, "login") %>
-  <%= submit_tag("Log in") %>
+  <%= submit_tag("Login") %>
 <% end %>
 
 <h1> Sign up </h1>
@@ -30,7 +43,6 @@
     <%= text_field_tag(:username) %>
     <%= label_tag(:password, "Password: ") %>
     <%= text_field_tag(:password) %>
-    <%= hidden_field_tag(:event, "signup") %>
     <%= submit_tag("Signup") %>
   </p>
 <% end %>

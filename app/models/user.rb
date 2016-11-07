@@ -4,8 +4,8 @@ class User < ApplicationRecord
 
   has_secure_password
   has_many :activities
-  has_many :properties_for_sale, class_name: 'Property', foreign_key: 'agent_id'
-  has_many :properties_owned, class_name: 'Property', foreign_key: 'resident_id'
+  has_many :properties_available, class_name: 'Property', foreign_key: 'agent_id'
+  has_many :properties_in_use, class_name: 'Property', foreign_key: 'resident_id'
 
   after_initialize :ensure_token
 

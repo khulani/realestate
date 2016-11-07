@@ -12,7 +12,7 @@ function properties() {
     "    \"status\": \"rented\",\n" +
     "    \"agent_id\": 23,\n" +
     "    \"resident_id\": 24,\n" +
-    "    \"auth_token\": \"authorized\"\n" +
+    "    \"auth_token\": \"Of04p3eLBO71fof2stHYIQ\"\n" +
     "  }"
   );
 }
@@ -22,10 +22,10 @@ function activities() {
   $("#notes").html("Notes: REST service for activities.");
   $("#json").val(
     "\n  {\n" +
-    "    \"event\": \"New Account created.\",\n" +
+    "    \"event\": \"Property rented: Stack Apartment\",\n" +
     "    \"user_id\": 4,\n" +
     "    \"date\": \"2016-01-01T23:59:59\",\n" +
-    "    \"auth_token\": \"authorized\"\n" +
+    "    \"auth_token\": \"Of04p3eLBO71fof2stHYIQ\"\n" +
     "  }"
   );
 }

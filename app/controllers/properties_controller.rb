@@ -1,4 +1,5 @@
 class PropertiesController < ApplicationController
+  before_action :access_status
 
   def index
     @properties = Property.all
@@ -6,32 +7,28 @@ class PropertiesController < ApplicationController
 
   def create
     @property = Property.create(property_params)
+    render :show
   end
 
   def show
-    @property = Property.find(params[:id])
+    @property = Property.find_by(id: params[:id])
     unless @property
-      # render :show
-    # else
       render status: 404, json: { errors: ["property '#{params[:id]}' not found."] }
     end
   end
 
   def update
-    @property = @user.properties.find_by(id: params[:id])
+    @property = Property.find_by(id: params[:id])
     if @property
-      if @property.update(property_params)
-        render :show
-      else
-        render status: 400, json: { errors: @property.errors.full_messages }
-      end
+      @property.update(property_params)
+      render :show
     else
       render status: 404, json: { errors: ["property '#{params[:id]}' not found."] }
     end
   end
 
   def destroy
-    property = @user.properties.find_by(id: params[:id])
+    property = Property.find_by(id: params[:id])
     if property
       if property.destroy
         render json: { status: "property '#{params[:id]}' destroyed." }

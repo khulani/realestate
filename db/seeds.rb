@@ -16,16 +16,16 @@ agent2 = User.create(username: 'agent2', password: 'agent2', account_type: 'agen
 customer1 = User.create(username: 'customer1', password: 'customer1', account_type: 'customer', token: 'customer1_token')
 customer2 = User.create(username: 'customer2', password: 'customer2', account_type: 'customer', token: 'customer2_token')
 
-Activity.create(event:'new user', date: 12.days.ago, user: admin)
-Activity.create(event:'new user', date: 10.days.ago, user: agent1)
-Activity.create(event:'new property', date: 9.days.ago, user: agent1)
-Activity.create(event:'new user', date: 5.days.ago, user: customer1)
-Activity.create(event:'property rented', date: 4.days.ago, user: customer1)
-Activity.create(event:'new user', date: 2.days.ago, user: agent2)
-Activity.create(event:'new property', date: 1.days.ago, user: agent2)
-Activity.create(event:'user update', date: 10.minutes.ago, user: agent1)
-Activity.create(event:'new user', date: 5.minutes.ago, user: customer2)
-Activity.create(event:'property sold', date: 1.minutes.ago, user: customer2)
+Activity.create(event:'User created: admin', date: 12.days.ago, user: admin)
+Activity.create(event:'User created: agent1', date: 10.days.ago, user: agent1)
+Activity.create(event:'Property created: agent1', date: 9.days.ago, user: agent1)
+Activity.create(event:'User created: customer1', date: 5.days.ago, user: customer1)
+Activity.create(event:'Property rented: Stack Apt', date: 4.days.ago, user: customer1)
+Activity.create(event:'User created: agent2', date: 2.days.ago, user: agent2)
+Activity.create(event:'Property created: Levi Stadium', date: 1.days.ago, user: agent2)
+Activity.create(event:'User logged out: customer1', date: 10.minutes.ago, user: agent1)
+Activity.create(event:'User created: customer2', date: 5.minutes.ago, user: customer2)
+Activity.create(event:'Property sold: customer2', date: 1.minutes.ago, user: customer2)
 
 Property.create!(name: 'US Post Office', street: '105 North 1st Street',
   city: 'San Jose', state: 'CA', latitude: 37.337775, longitude: -121.892338,

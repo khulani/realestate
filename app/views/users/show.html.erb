@@ -1,13 +1,51 @@
-<h1> Log in </h1>
+<h1>
+  Welcome, <%= @user.username %> (<%= @user.account_type %>)
+</h1>
+
+<% if @user.account_type == 'admin' %>
+  <% title = 'All' %>
+  <% pdf = 'User Activites' %>
+  <% properties = Property.limit(50) %>
+<% else %>
+  <% title = 'Your' %>
+  <% pdf = 'Property Details' %>
+  <% properties = @user.account_type == 'agent' ? @user.properties_available : @user.properties_in_use %>
+<% end %>
 
 <p>
-  <%= @user.account_type %>
+  <%= link_to('Real Estate Operations', '/real-estate/', method: :get) %>
+  | View My Report: <%= link_to "#{pdf} (PDF)", user_path(@user, format: 'pdf') %>
+  | <a href="/logout">Log out</a>
 </p>
 
-<p>
-  <%= link_to("Delete my account", "/users/#{@user.id}", method: :delete)  %>
-</p>
+<h3> <%= title %> Properties (<a onclick="centerMap()" href="#">reset map</a>)</h3>
+<div id="map" style="height:500px;width:800px;"></div>
+<script>
+  var map;
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: 37.335206, lng: -121.892924 },
+      zoom: 15
+    });
+    <% properties.each do |property| %>
+      <% if property.latitude && property.longitude %>
+        new google.maps.Marker({
+          position: {lat: <%= property.latitude %>, lng: <%= property.longitude %>},
+          map: map,
+          title: "<%= property.name %>"
+        });
+      <% end %>
+    <% end %>
+  }
+  function centerMap() {
+    map.setCenter({ lat: 37.335206, lng: -121.892924 });
+    map.setZoom(15);
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRyKKYpV6LAy-jRbA02c8qB3FyRVu3hU8&callback=initMap" async defer></script>
 
 <p>
-  <a href="/logout">Log out</a>
+  </p>
+<p>
+  <%= link_to('Delete my account', user_path(@user), method: :delete) %>
 </p>
