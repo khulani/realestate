@@ -1,24 +1,22 @@
-# README
+# Real Estate (3-day coding challenge)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Main Features
+* Allows users to log in or sign up.
+* Generates PDF reports on user activity, agent properties, and user properties
+* Display Real Estate locations on Google Maps
+* Facilitates selling and renting of properties (as well as "returning" properties)
+* RESTful web services for properties and activities
 
-Things you may want to cover:
+## Technology Used
+* Ruby on Rails
+* MySQL
+* Rspec (Unit tests)
+* Prawn (Fast, Nimble PDF Generation For Ruby)
+* Google Maps JavaScript API
+* Model-View-Controller (design pattern)
 
-* Ruby version
+![design-diagram]
+![activity-diagram]
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[design-diagram]: ./docs/design_diagram.png
+[activity-diagram]: ./docs/activity_diagram.png
