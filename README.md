@@ -1,5 +1,7 @@
 # Real Estate (3-day coding challenge)
 
+(click [here](./docs/demo.swf) to view flash demo video) 
+
 ## Main Features
 * Allows users to log in or sign up.
 * Generates PDF reports on user activity, agent properties, and user properties
