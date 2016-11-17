@@ -58,8 +58,12 @@ class RealEstateController < ApplicationController
   end
 
   def delete
-    property = @user.properties_available.find_by(id: params[:id])
-    if property.destroy
+    if @user.account_type == 'admin'
+      property = Property.find_by(id: params[:id])
+    else
+      property = @user.properties_available.find_by(id: params[:id])
+    end
+    if property && property.destroy
       event = "Property deleted: #{property.name}"
       @user.activities.create(event: event, date: Time.now)
       flash[:errors] = [event]
